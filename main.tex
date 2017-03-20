@@ -1,0 +1,163 @@
+% v1.9 - 2017-02-03 
+% - Dirk: fixed warning: Underfull \hbox (badness 10000) in paragraph main.tex
+% - Dirk: fixed warning: "Data encoding is UTF8" -> style.tex 0.1.8
+% v1.8 - 2017-02-02
+% - Dirk: replaced titlesec package by KOMA-script commands.-> style.tex v0.1.7
+% v1.7 - 2014-11-18
+% - bib fixes: now using biber instead of bibtex (thanks felix)
+% - compile now with pdflatex -> biber -> pdflatex
+% v1.6 - 2013-05-13
+% - bibliography headers fixed - thanx lorenz lehmann
+% - high quality titlepage - thanx thomas graf
+% - removed separation of online and offline references -> style 1.4a
+% v1.5 - 2013-01-16
+
+\documentclass[twoside,11pt,titlepage,a4paper,english,bibliography=totocnumbered,listof=numbered]{scrbook}
+%
+% Template Style
+\include{style/style}
+%\bibliography{main}
+\addbibresource{bibliography.bib}
+
+% custom hyphenation					% add words to this list to prevent hyphenation
+\hyphenation{
+ASCII
+TCP
+}
+
+%make readable references
+\usepackage[pdftex,pdfpagelabels=true]{hyperref}
+\hypersetup{%
+	pdftitle={Thesis Title},
+	pdfauthor={Thesis Author},
+	pdfkeywords={key1, key2, key3},
+	pdfsubject={Thesis Subject}
+}
+
+% Adding a finite stretch on the page suppresses "Underfull \vbox (badness 10000)" warnings.
+\makeatletter
+\def\@textbottom{\vskip \z@ \@plus 1pt}
+\let\@texttop\relax
+\makeatother
+
+\begin{document}
+
+%--------------------------------------------------------------
+\frontmatter
+
+%\begin{titlepage}
+%\AddToShipoutPicture*{
+%\put(0,0){
+%\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio=false]{images/snet/titlepage.pdf}}}
+%\strut
+%\end{titlepage}
+%\thispagestyle{empty}
+
+%titlepage
+\begin{titlepage}
+	\AddToShipoutPicture*{
+		\put(0,0){
+			\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio=false]{images/snet/titlepage.pdf}
+		}
+	}
+	\strut
+	\hfill
+	\begin{center}
+	\vspace{1cm}
+		\Huge
+		\begin{spacing}{.9}
+			\textcolor{DarkRed}{\textbf{Evaluation of cloud deployment tools and methods to deliver an online learning platform in an SME setting}}\\
+		\end{spacing}
+		\vspace{0.8cm}
+		\large
+		by\\
+		\vspace{0.8cm}
+		\textbf{Burcin Baykan}\\
+		\vspace{0.8cm}
+		\textbf{Matriculation Number 358882}\\
+		\vspace{2cm}
+	 	A thesis submitted to\\
+		\vspace{0.5cm}
+		Technische Universität Berlin\\
+		School IV - Electrical Engineering and Computer Science\\
+		Department of Telecommunication Systems\\
+		Service-centric Networking\\
+		\vspace{0.5cm}
+		Master Thesis\\
+		\vspace{2.2cm}
+		\today\\
+		\vspace{2.0cm}
+		\large
+		Supervised by:\\
+		Prof. Dr. Axel Küpper\\
+		\vspace{1cm}
+		Assistant supervisor:\\
+		Prof. Dr. habil. Odej Kao
+		\end{center}
+         		%\includegraphics[scale=1.0]{images/watermark.png}
+\end{titlepage}
+\thispagestyle{empty}
+
+\cleardoublepage
+
+\newpage
+
+\section*{\thispagestyle{empty}Eidestattliche Erklärung / Statutory Declaration}
+Hiermit versichere ich, dass ich diese Arbeit selbst\-ständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe.
+\vspace{2em}
+
+\noindent I hereby declare that I have created this work completely on my own and used no other sources or tools than the ones listed.
+
+\vspace{30 mm}
+\begin{flushright}
+
+\rule{90mm}{1pt}
+
+Berlin, \today \hspace{15 mm} Chuck Norris' son
+\end{flushright}
+\clearpage
+
+\cleardoublepage{}
+
+\newpage
+%\input{acknowledgments}				% "I would like to thank my teddybear..." and such stuff...
+
+\input{content/00_abstract}
+\input{content/00_zusammenfassung}
+\thispagestyle{empty}
+
+\tableofcontents{\thispagestyle{empty}}
+
+%--------------------------------------------------------------
+\mainmatter
+
+%\part{}						% optional: use parts to structure your thesis
+\input{content/01_introduction}
+\input{content/02_related_work}
+\input{content/03_concept_and_design}
+\input{content/04_implementation}
+\input{content/05_evaluation}
+\input{content/06_conclusion}
+
+%--------------------------------------------------------------
+\backmatter
+
+\listoftables
+\listoffigures
+
+\setwidesite{}						% Set page to be wider for bibliography
+
+\label{cha:bibliography}
+\markboth{Bibliography}{Bibliography}
+\addcontentsline{toc}{chapter}{Bibliography}
+\printbibliography
+%\printbibliography[heading=offline,filter=offline]
+%\printbibliography[heading=online,filter=online]
+
+\begin{appendices}
+
+\input{content/appendices/a01_listings}
+
+\end{appendices}
+
+\end{document}
