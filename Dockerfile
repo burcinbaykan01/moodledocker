@@ -18,6 +18,9 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV MOODLE_ADMIN eledia
 ENV MOODLE_ADMIN_PASSWORD Eledia28!
 ENV MOODLE_ADMIN_EMAIL bb@eledia.de
+ENV MOODLE_LANGUAGE de
+ENV MOODLE_SHORTNAME host
+ENV MOODLE_FULLNAME EleDia GmbH
 
 
 
@@ -39,7 +42,7 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 ADD ./foreground.sh /etc/apache2/foreground.sh
 
 RUN apt-get update && \
-	apt-get -y install mysql-client php7.0-soap php7.0-zip php7.0-mbstring php7.0-xml php7.0-cli php7.0-ldap pwgen python-setuptools curl git unzip apache2 php7.0 \
+	apt-get -y install vim nano memcached php7.0 php7.0-dev php-pear php7.0-memcached  libmemcached-dev build-essential mysql-client php7.0-soap php7.0-zip php7.0-mbstring php7.0-xml php7.0-cli php7.0-ldap pwgen python-setuptools curl git unzip apache2 php7.0 \
 		php7.0-gd libapache2-mod-php7.0 postfix wget supervisor php7.0-pgsql curl libcurl3 \
 		libcurl3-dev php7.0-curl php7.0-xmlrpc php7.0-intl php7.0-mysql git-core && \
 	cd /tmp && \

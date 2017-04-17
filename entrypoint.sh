@@ -79,6 +79,9 @@ fi
 
 echo "Installing moodle"
 php /var/www/html/admin/cli/install_database.php \
+          --lang=${MOODLE_LANGUAGE} \
+          --fullname=${MOODLE_FULLNAME} \
+          --shortname=${MOODLE_SHORTNAME} \
           --adminemail=${MOODLE_ADMIN_EMAIL} \
           --adminuser=${MOODLE_ADMIN} \
           --adminpass=${MOODLE_ADMIN_PASSWORD} \
