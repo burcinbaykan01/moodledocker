@@ -3,10 +3,10 @@ services:
   moodle:
     image: burcin/moodle
     links:
-      - moodle_db
+      - moodle_db_master
     environment:
        MOODLE_URL: "http://130.149.22.217:8080"
-       DB_PORT_3306_TCP_ADDR: moodle_db
+       DB_PORT_3306_TCP_ADDR: moodle_db_master
        DB_ENV_MYSQL_USER: moodle
        DB_ENV_MYSQL_PASSWORD: moodle
        DB_ENV_MYSQL_DATABASE: moodle
@@ -33,19 +33,34 @@ services:
 
 
 
-  moodle_db:
+  moodle_db_master:
     image: mysql:latest
     environment:
       MYSQL_DATABASE: moodle
       MYSQL_ROOT_PASSWORD: moodle
       MYSQL_USER: moodle
       MYSQL_PASSWORD: moodle
+      MYSQL_REPLICATION_MODE: master
+      MYSQL_REPLICATION_USER: moodle
+      
     ports:
-      - "3306:3306"
+      - "3306"
     volumes:
       - .data/moodledb:/var/lib/mysql
      
     restart: always
 
- 
-
+  mysql-slave:
+   image: mysql:latest
+   ports:
+    - '3306'
+   depends_on:
+    - moodle_db_master
+   environment:
+    - MYSQL_REPLICATION_MODE=slave
+    - MYSQL_REPLICATION_USER=replicant
+    - MYSQL_USER=moodle
+    - MYSQL_DATABASE=moodle
+    - MYSQL_MASTER_HOST=moodle_db_master
+    - MYSQL_MASTER_PORT=3306
+    - MYSQL_ROOT_PASSWORD=moodle
