@@ -14,8 +14,7 @@ services:
       - "8080:80"
     restart: always
     volumes: 
-      - .data/moodledata:/var/moodledata
-      - .data/html/info.php:/var/www/html/info.php
+      - moodledata:/var/moodledata
 
   lb:
     image: dockercloud/haproxy
@@ -28,9 +27,6 @@ services:
 
   memcached:
    image: memcached
-   ports:
-    - "11211:11211"
-
 
 
   moodle_db_master:
@@ -43,8 +39,6 @@ services:
       MYSQL_REPLICATION_MODE: master
       MYSQL_REPLICATION_USER: moodle
       
-    ports:
-      - "3306"
     volumes:
       - .data/moodledb:/var/lib/mysql
      
@@ -52,8 +46,6 @@ services:
 
   mysql-slave:
    image: mysql:latest
-   ports:
-    - '3306'
    depends_on:
     - moodle_db_master
    environment:
@@ -64,3 +56,6 @@ services:
     - MYSQL_MASTER_HOST=moodle_db_master
     - MYSQL_MASTER_PORT=3306
     - MYSQL_ROOT_PASSWORD=moodle
+
+volumes:
+  moodledata:
