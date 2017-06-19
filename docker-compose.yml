@@ -5,7 +5,7 @@ services:
     links:
       - moodle_db_master
     environment:
-       MOODLE_URL: "http://130.149.22.217:8080"
+       MOODLE_URL: "http://52.54.54.216:8080"
        DB_PORT_3306_TCP_ADDR: moodle_db_master
        DB_ENV_MYSQL_USER: moodle
        DB_ENV_MYSQL_PASSWORD: moodle
