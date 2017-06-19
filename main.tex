@@ -19,11 +19,13 @@
 %\bibliography{main}
 \addbibresource{bibliography.bib}
 
+\usepackage{pdfpages} 
+
+
 % custom hyphenation					% add words to this list to prevent hyphenation
 \hyphenation{
 ASCII
-TCP
-}
+TCP}
 
 %make readable references
 \usepackage[pdftex,pdfpagelabels=true]{hyperref}
@@ -133,13 +135,14 @@ Berlin, \today \hspace{15 mm} Chuck Norris' son
 
 %\part{}						% optional: use parts to structure your thesis
 \input{content/01_introduction}
-\input{content/02_related_work}
-\input{content/03_concept_and_design}
-\input{content/04_implementation}
-\input{content/05_evaluation}
-\input{content/06_conclusion}
+\input{content/03_related_work}
+\input{content/04_concept_and_design}
+\input{content/05_implementation}
+\input{content/06_evaluation}
+\input{content/07_conclusion}
 
-%--------------------------------------------------------------
+%----------------------------\chapter{fundamentals}
+----------------------------------
 \backmatter
 
 \listoftables

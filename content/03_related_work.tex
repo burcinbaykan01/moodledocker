@@ -1,0 +1,112 @@
+\chapter{Related Work}
+\label{cha:relatedwork}
+
+
+\section{Cloud Computing}
+Cloud computing is the common name for internet-based computing services for computers and other devices that provides computer resources which can be used at any time and can be shared among users.
+It provides virtualized computing resources such as software and other services for storing, managing and processing of data over the internet instead of own hardware. 
+\subsection{Service models}
+\subsubsection{Infrastructure as a service (IaaS)}
+Iaas model is the basic cloud service model. Cloud providers provide servers, physical or virtual machines.
+Cloud provider enable to access to virtualized resources such as computer, networks and storages. The user can design their own virtual machines.  
+\subsubsection{Platform as a service (PaaS)}
+
+In this cloud model, cloud provides to access to the programming or runtime environments with flexible, dynamically adaptable data capacities. The users can develop or run their own software within a software environment provided and maintained by the service provider.  
+\subsubsection{Software as a service (SaaS)}
+\subsection{Deployment models}
+\subsubsection{Private cloud}	
+\subsubsection{Public cloud}	
+\subsubsection{Hybrid cloud}
+
+\section{CYCLONE}
+CYCLONE (Complete and Dynamic Multicloud Application Management) is a project which is developed by the European Commission. It is a Horizon 2020 innovation action that aims to combine cloud management tools for deploying, managing and using the multi-cloud apps. It is very complex to deploy and manage the apps on multiple cloud infrastructures. CYCLONE solves the problem and offers many advantages e.g. scability, portability of  cloud apps. CYCLONE enables a united management of apps on federated clouds using integrated cloud management software and tools. 
+CYCLONE is based on another integrated components such as SlipStream, Stratuslab and OpenNaaS and enables to combine this components in a single platform
+
+\subsection{SlipStream}
+Slipstream is the main component of CYCLONE which is developed by SixSq.  SlipStream  is a open source software and can be  used for managing the whole lifecycle of cloud applications. It includes deployment engine, a app store and a service catalog.  SlipStream provides many services e.g defining the application topologies. It allows to access all resources for deploying the application. SlipStream makes easier to manage the configuration of deployed application. In addition, SlipStream reduces the administration load with integrated brokering, checking, and matchmaking options.  The users can focus on their application rather than the configuration of the virtual machines. It aims to improve the security of cloud infrastructure and enables the implementation, configuration, and using the complex cloud applications.
+
+\subsubsection{Nuv.la} 
+
+This chapter describes the interfaces which are used for the deployment and configuration of cloud-based app within SlipStream. SlipStream includes web interface and REST API and can be used through the Nuv.la Online Application Deployment Platform. It manages the whole lifecycle of apps. The application developers can directly use the Nuv.la and deploy the application. To deploy an application, a deployment plan will be created in SlipStream. 
+
+
+Deployment plan 
+
+
+-	In this step, the application is defined by the application developer. The description includes the components such as virtual machines, storages and services and it describes how they will communicate with each other. The SlipStream users and app developers can choice the cloud provider and save the description of the app within Nuv.la
+-	Slipstream can create the deployment plan for provisioning of all resources , when application developer selected the defined application. 
+-	When the deployment plan is created, SlipStream can configure all components of application.
+-	SlipStream users can monitor the state of all components. SlipStream can periodically check the state of all resources via the metrics such as CPU, RAM. 
+-	The application developers can select how the resources should be allocated to components because the load of components can be changed at any moment. The description of resource allocation can be defined manually or through defined rule. The resources can be scale up or scale down depending on what it needs. SlipStream allows to users to scale a running instance horizontally and vertically. Horizontal scaling happens when the virtual machines can be added or removed by SlipStream.  Vertical scaling occurs when the CPU, RAM or disk space can be changed by SlipStream. 
+-	If the components are no longer needed, the users can terminate them. 
+
+
+Limited Services of Nuv.la
+
+The settings of running instances on SlipStream can be changed by the application developer. SlipStream allows to make changes to the running instances via defined application livecycle and API. There are some restrictions of services of Nuv.la, it is written in the next under chapter, which changes can be made and which not. 
+
+Limitation of Migration
+
+The users can  move the application from one cloud provider to another cloud provider for reducing the costs by moving to cheap cloud provider or to move to better cloud provider with lower-latency connections. But  there may be some technical problems when the user moves direct the application to another cloud. CYCLONE doesn’t support pure migration. CYCLONE  allows to make changes to the environmental sharing of resources. The changes can be made via horizontal scaling capability. The users can select a another cloud provider and/or in different area. When the new virtual machines are running in another region / on cloud provider successfully without technical barries, the old virtual machines can be stopped.
+
+Update
+
+CYCLONE is not able to perform security updates for running applications. The defined application and SlipStream API are focusing only on the deployment and management of the application. There some tools can be used such as Chef and Puppet for performing security updates.
+
+\subsubsection{Identity federation}
+
+\subsubsection{OpenNaas}
+OpenNaaS is a open source software and it is software-defined network controller that provides automated deployment and configuration of network infrastructures.  It aims to reduce the configuration complexity and provides services for provisioning dynamic network resources.
+\subsubsection{Tresor}
+
+\section{Docker}
+In this section it is described what docker containers are and why it is useful having docker container instead a VM for rolling the application. 
+
+Eledia GmbH has VMs for customers. Moodle instances are running on this VMs. Deployment of VMs is very complex. When the company buys new physical servers that must be configured first. For example, installing operating system and setting up XEN server. XEN Server is a platform which can operate several virtual machines. As one can imagine it all, it takes very long to configure VM and install moodle instance for each customer. Another important problem of using VMs is that the operating systems, drivers and systems files of VMs cause a strong overhead. Hence, it was decided to use a useful technology, called docker. Docker is very miraculous container technology, which makes the application ready to use in a matter of seconds, included all components such a databases and load balancer. The application is deployed with one click and the components are automatically configured. Docker is most used container platform in the world and is provided as open source software. In March 2013, Docker was first published by dotCloud. Docker allows running applications in containers and enables to encapsulate them from each other. The application is packed and its dependencies (OS, runtime environment, libraries) into an image. Hence, docker containers are lightweight and faster than VMs. 
+
+
+\subsection{The architecture of Docker}
+Docker is based on powerful mechanism and consists of Client/Server architecture model. Docker Client doesn’t directly communicate with containers. It communicates via HTTP with the Docker Daemon which is located on the host. Docker Daemon communicates with the containers on the host.
+
+\subsubsection{Docker Daemon}
+
+Docker Daemon provides an environment for creating, running of containers which are based on images. A REST API is used to communicate with the daemon. The commands of users are forwarded for processing to docker daemon via command line interface (CLI). 
+
+
+\subsubsection{Docker client}
+
+The task of docker client is to accept the commands of users via command line interface (CLI) and to forward the commands for processing to docker daemon. CLI provides a set of commands for the user which enables to talk with docker daemon. For example pulling a new image from the reqistry, creating a new container from an image.
+
+
+\subsection{Docker hub}
+Docker Hub is a service that includes a registry for docker images and repositories. It is a repository for docker images and is providing a comprehensive set of applications which can be easily downloaded and used. Repositories can be created and used in docker hub and the image can be managed and distributed. It was released as open-source software by Docker Inc. The registry is divided into a public and a private registry. Public registry allows uploading your own images and sharing with others. In addition, it makes possible pulling existing images which are uploaded by other users. These images can be customized and saved on the own host by the user. On the other hand, the private registry allows saving own images in private directory and pulling the own images. The private registry can’t be found from outside without permission of owners.
+
+\subsubsection{Docker images}
+
+Docker Hub is a service that includes a registry for docker images and repositories. It is a repository for docker images and is providing a comprehensive set of applications which can be easily downloaded and used. Repositories can be created and used in docker hub and the image can be managed and distributed. It was released as open-source software by Docker Inc. The registry is divided into a public and a private registry. Public registry allows uploading your own images and sharing with others. In addition, it makes possible pulling existing images which are uploaded by other users. These images can be customized and saved on the own host by the user. On the other hand, the private registry allows saving own images in private directory and pulling the own images. The private registry can’t be found from outside without permission of owners.
+
+\subsubsection{Docker compose}
+\subsubsection{Docker swarm}
+\subsubsection{Docker machine}
+\subsection{Benefits of docker}
+\subsubsection{Automated deployment of application}
+\subsubsection{Portable}
+\subsubsection{Lightweight}
+\subsubsection{Fast}
+
+
+\section{Loadbalancing}
+In some cases, requests of client may exceed the capacity of server and cause problems.  The response time of server increases when the server gets a lot of requests from client.  This causes running the application slowly and the server cannot handle all requests. In order to overcome these problems, we will use a load balancer. Load balancer aims to balance the traffic on the existing network. It is a mechanism which provides to perform the load balancing operation without intervention from user. Hence, it is important to keep in mind that load balancing is the whole of the services that allows optimal use of resources, distribution of load on multiple servers and the minimization of response time. Load distribution is very important for web servers because a single web server can only answer a limited amount of requests at once. The usage of load balancer increases the high availability of system when the failure of one web server is detected and the requests are forwarded to another web server automatically. 
+
+
+
+
+\section{Automation tools}
+\subsection{Chef}
+\subsection{Puppet}
+
+
+
+
+
+
